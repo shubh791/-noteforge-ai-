@@ -6,6 +6,9 @@ import InputPanel from '@/components/InputPanel'
 import PreviewPanel from '@/components/PreviewPanel'
 import Footer from '@/components/Footer'
 
+const STORAGE_KEY = 'noteforge_output'
+const STORAGE_INPUT = 'noteforge_input'
+
 const loadHtml2Canvas = () => new Promise((resolve, reject) => {
   if (typeof window !== 'undefined' && window.html2canvas) {
     resolve(window.html2canvas); return
@@ -26,6 +29,31 @@ export default function Home() {
   const [exporting, setExporting]   = useState(false)
   const [mobileTab, setMobileTab]   = useState('input')
   const notesRef = useRef(null)
+
+  /* Restore saved input + notes on mount */
+  useEffect(() => {
+    const savedInput = localStorage.getItem(STORAGE_INPUT)
+    if (savedInput) setInputText(savedInput)
+
+    const savedOutput = localStorage.getItem(STORAGE_KEY)
+    if (savedOutput) {
+      setOutputHtml(savedOutput)
+      setStatus('done')
+      setMobileTab('preview')
+    }
+  }, [])
+
+  /* Persist input text */
+  useEffect(() => {
+    localStorage.setItem(STORAGE_INPUT, inputText)
+  }, [inputText])
+
+  /* Persist notes */
+  useEffect(() => {
+    if (outputHtml) {
+      localStorage.setItem(STORAGE_KEY, outputHtml)
+    }
+  }, [outputHtml])
 
   /* Auto-switch to preview when generation starts */
   useEffect(() => {
@@ -84,11 +112,13 @@ export default function Home() {
     }
   }, [inputText, apiKey])
 
-  const handleClear = useCallback(() => {
-    setInputText('')
+  const handleClearNotes = useCallback(() => {
     setOutputHtml('')
     setStatus('idle')
     setErrorMsg('')
+    localStorage.removeItem(STORAGE_KEY)
+    localStorage.removeItem(STORAGE_INPUT)
+    setInputText('')
     setMobileTab('input')
   }, [])
 
@@ -140,7 +170,7 @@ export default function Home() {
       <Topbar
         status={status}
         exporting={exporting}
-        onClear={handleClear}
+        onClear={handleClearNotes}
         onGenerate={handleGenerate}
         onExportImage={handleExportImage}
       />
