@@ -1,0 +1,170 @@
+@import "tailwindcss";
+
+/* ─── Custom keyframes (renamed to avoid conflict with Tailwind built-ins) ─── */
+@keyframes notes-spin    { to { transform: rotate(360deg); } }
+@keyframes notes-pulse   { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.35; transform:scale(.7); } }
+@keyframes notes-shimmer { 0%,100%{ opacity:.8; } 50%{ opacity:1; } }
+
+/* ─── Animated UI elements ─── */
+.btn-spinner {
+  width: 13px; height: 13px;
+  border: 2px solid rgba(196,181,253,.3);
+  border-top-color: #c4b5fd;
+  border-radius: 50%;
+  display: inline-block;
+  animation: notes-spin .75s linear infinite;
+  flex-shrink: 0;
+}
+
+.stream-dot {
+  width: 7px; height: 7px;
+  background: #7c3aed;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: notes-pulse 1s ease-in-out infinite;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #7c3aed, #06b6d4);
+  border-radius: 2px;
+  transition: width 1.5s ease;
+  animation: notes-shimmer 2s ease infinite;
+}
+
+.loading-ring {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 3px solid #e2e8f0;
+  border-top-color: #7c3aed;
+  border-right-color: rgba(124,58,237,.3);
+  animation: notes-spin .9s ease-in-out infinite;
+  box-shadow: 0 0 18px rgba(124,58,237,.15);
+}
+
+/* ════════════════════════════════════════════════════
+   NOTES PAGE — matches reference images exactly
+   2-column newspaper layout, white card, clean sections
+   ════════════════════════════════════════════════════ */
+
+.notes-page {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 28px 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-shadow: 0 4px 24px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.06);
+
+  /* Newspaper 2-column layout — matches reference images */
+  column-count: 2;
+  column-gap: 28px;
+  column-rule: 2px solid #e5e7eb;
+  column-fill: balance;
+
+  /* Base typography — all AI-generated inline styles inherit from here */
+  font-family: 'Outfit', sans-serif !important;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #1a1a2e;
+}
+
+/* ── Reset Tailwind base on notes content so inline styles take full effect ── */
+.notes-page *             { box-sizing: border-box; }
+.notes-page h1,
+.notes-page h2,
+.notes-page h3,
+.notes-page h4,
+.notes-page h5,
+.notes-page h6           { font-size: revert; font-weight: revert; margin: revert; }
+.notes-page p            { margin: 0 0 8px; }
+.notes-page ul,
+.notes-page ol           { margin: 0; padding: 0; list-style: none; }
+.notes-page table        { border-collapse: collapse; }
+.notes-page img          { max-width: 100%; }
+
+/* ── Question header — always full-width, never in a column ── */
+.notes-page > :first-child {
+  column-span: all;
+  margin-bottom: 20px !important;
+}
+
+/* ── Section dividers — full-width ruled line between numbered sections ── */
+.notes-page > hr {
+  column-span: all;
+  border: none;
+  border-top: 2.5px solid #e2e8f0;
+  margin: 22px 0 0;
+}
+
+.notes-page > div[style*="border-top:2px solid #e2e8f0"],
+.notes-page > div[style*="border-top: 2px solid #e2e8f0"],
+.notes-page > div[style*="border-top:1.5px solid #e2e8f0"],
+.notes-page > div[style*="border-top: 1.5px solid #e2e8f0"] {
+  column-span: all;
+  break-after: avoid;
+  margin: 16px 0 10px !important;
+}
+
+/* ── Numbered section titles — full-width so heading + content stay together ── */
+.notes-page > h3 {
+  column-span: all;
+  break-after: avoid;
+  margin-top: 0 !important;
+  margin-bottom: 12px !important;
+}
+
+/* ── Full-width elements — too wide for a single column ── */
+.notes-page table                                       { column-span: all; break-inside: avoid; width: 100%; }
+.notes-page div[style*="repeat(4,1fr)"]                 { column-span: all; }
+.notes-page div[style*="column-span:all"],
+.notes-page div[style*="column-span: all"]              { column-span: all; }
+.notes-page div[style*="grid-template-columns:1fr 1fr"] { column-span: all; break-inside: avoid; }
+
+/* Flowcharts and tree diagrams — span full width */
+.notes-page div[style*="flex-direction:column"][style*="align-items:center"] { column-span: all; }
+.notes-page div[style*="justify-content:center"][style*="flex-wrap:wrap"]    { column-span: all; }
+
+/* ── Cards + boxes — never split mid-card ── */
+.notes-page div[style*="border-radius:10px"],
+.notes-page div[style*="border-radius:8px"],
+.notes-page div[style*="border:2px solid"],
+.notes-page div[style*="border:1.5px solid"]            { break-inside: avoid; }
+
+/* ── Mobile: single column ── */
+@media (max-width: 768px) {
+  .notes-page {
+    column-count: 1 !important;
+    column-rule: none !important;
+    padding: 18px 16px;
+    border-radius: 8px;
+  }
+  .notes-page > h3,
+  .notes-page > div[style*="border-top:2px solid #e2e8f0"],
+  .notes-page > div[style*="border-top: 2px solid #e2e8f0"],
+  .notes-page > div[style*="border-top:1.5px solid #e2e8f0"],
+  .notes-page > div[style*="border-top: 1.5px solid #e2e8f0"],
+  .notes-page div[style*="grid-template-columns:1fr 1fr"],
+  .notes-page div[style*="flex-direction:column"][style*="align-items:center"],
+  .notes-page div[style*="justify-content:center"][style*="flex-wrap:wrap"] {
+    column-span: unset;
+  }
+}
+
+/* ─── Scrollbars ─── */
+.scroll-thin::-webkit-scrollbar          { width: 4px; }
+.scroll-thin::-webkit-scrollbar-thumb    { background: #e2e8f0; border-radius: 2px; }
+.scroll-preview::-webkit-scrollbar       { width: 6px; }
+.scroll-preview::-webkit-scrollbar-track { background: #e2e8f0; }
+.scroll-preview::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+
+/* ─── Print ─── */
+@media print {
+  .notes-page {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    max-width: 100% !important;
+    column-count: 2 !important;
+    column-gap: 28px !important;
+  }
+  .notes-page > :first-child { column-span: all !important; }
+}
