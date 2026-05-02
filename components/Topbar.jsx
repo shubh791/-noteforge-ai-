@@ -25,7 +25,7 @@ export default function Topbar({ status, exporting, onClear, onGenerate, onExpor
       <div className="flex items-center gap-2">
         <button
           onClick={onClear}
-          className="hidden xs:inline-flex items-center px-4 py-2 rounded-xl text-xs font-bold text-slate-500 bg-slate-100/50 hover:bg-slate-100 hover:text-slate-700 transition-all active:scale-95 border border-transparent hover:border-slate-200"
+          className="inline-flex items-center px-4 py-2 rounded-xl text-xs font-bold text-slate-500 bg-slate-100/50 hover:bg-slate-100 hover:text-slate-700 transition-all active:scale-95 border border-transparent hover:border-slate-200"
         >
           Clear
         </button>

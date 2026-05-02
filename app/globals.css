@@ -105,12 +105,12 @@
   margin: 16px 0 10px !important;
 }
 
-/* ── Numbered section titles — full-width so heading + content stay together ── */
+/* ── Numbered section titles — stay in column flow, never orphan from content ── */
 .notes-page > h3 {
-  column-span: all;
   break-after: avoid;
+  break-before: avoid;
   margin-top: 0 !important;
-  margin-bottom: 12px !important;
+  margin-bottom: 8px !important;
 }
 
 /* ── Full-width elements — too wide for a single column ── */
