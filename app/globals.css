@@ -88,12 +88,13 @@
   margin-bottom: 20px !important;
 }
 
-/* ── Section dividers — full-width ruled line between numbered sections ── */
+/* ── Section dividers — full-width gradient line between numbered sections ── */
 .notes-page > hr {
   column-span: all;
   border: none;
-  border-top: 2.5px solid #e2e8f0;
-  margin: 22px 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #c7d2fe, #a5b4fc, #c7d2fe, transparent);
+  margin: 20px 0 0;
 }
 
 .notes-page > div[style*="border-top:2px solid #e2e8f0"],
