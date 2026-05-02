@@ -108,12 +108,16 @@
   margin: 16px 0 10px !important;
 }
 
-/* ── Numbered section titles — stay in column flow, never orphan from content ── */
-.notes-page > h3 {
+/* ── Section wrapper divs — never break a card mid-render ── */
+.notes-page > div[style*="border-radius:10px"],
+.notes-page > div[style*="border-radius:9px"] {
+  break-inside: avoid;
+}
+
+/* ── h3 inside section wrapper — always at top, never orphan ── */
+.notes-page h3 {
   break-after: avoid;
-  break-before: avoid;
   margin-top: 0 !important;
-  margin-bottom: 8px !important;
 }
 
 /* ── Full-width elements — too wide for a single column ── */
