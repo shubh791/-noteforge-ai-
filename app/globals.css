@@ -50,18 +50,20 @@
 .notes-page {
   background: #ffffff;
   border-radius: 14px;
-  padding: 28px 32px;
-  max-width: 1200px;
+  padding: 24px 28px;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
   box-shadow: 0 4px 24px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.06);
+  overflow: hidden;
 
-  /* Newspaper 2-column layout — matches reference images */
+  /* Newspaper 2-column layout */
   column-count: 2;
-  column-gap: 28px;
-  column-rule: 2px solid #e5e7eb;
+  column-gap: 24px;
+  column-rule: 1.5px solid #e5e7eb;
   column-fill: balance;
 
-  /* Base typography — all AI-generated inline styles inherit from here */
+  /* Base typography */
   font-family: 'Outfit', sans-serif !important;
   font-size: 13px;
   line-height: 1.8;
@@ -69,7 +71,7 @@
 }
 
 /* ── Reset Tailwind base on notes content so inline styles take full effect ── */
-.notes-page *             { box-sizing: border-box; }
+.notes-page *             { box-sizing: border-box; max-width: 100%; word-break: break-word; overflow-wrap: break-word; }
 .notes-page h1,
 .notes-page h2,
 .notes-page h3,
@@ -136,8 +138,9 @@
   .notes-page {
     column-count: 1 !important;
     column-rule: none !important;
-    padding: 18px 16px;
+    padding: 16px 14px;
     border-radius: 8px;
+    max-width: 100%;
   }
   .notes-page > h3,
   .notes-page > div[style*="border-top:2px solid #e2e8f0"],
