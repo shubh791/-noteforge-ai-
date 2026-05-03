@@ -54,7 +54,7 @@ export async function POST(req) {
       },
       body: JSON.stringify({
         model: NIM_MODEL,
-        max_tokens: 8192,
+        max_tokens: 16384,
         temperature: 0.2,
         stream: true,
         messages: [
