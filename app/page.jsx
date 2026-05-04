@@ -9,6 +9,30 @@ import Footer from '@/components/Footer'
 const STORAGE_KEY = 'noteforge_output'
 const STORAGE_INPUT = 'noteforge_input'
 
+/* Remove duplicate sections that the model occasionally emits twice */
+function dedupeHtmlSections(html) {
+  if (typeof window === 'undefined' || !html) return html
+  const doc = new DOMParser().parseFromString(html, 'text/html')
+  const seen = new Set()
+  doc.body.querySelectorAll('h3').forEach(h3 => {
+    // Normalise: strip leading number, lowercase, first 50 chars
+    const key = h3.textContent
+      .replace(/^\d+\.\s*/, '')
+      .trim()
+      .toLowerCase()
+      .slice(0, 50)
+    if (!key) return
+    if (seen.has(key)) {
+      const prev = h3.previousElementSibling
+      if (prev?.tagName === 'HR') prev.remove()
+      h3.remove()
+    } else {
+      seen.add(key)
+    }
+  })
+  return doc.body.innerHTML
+}
+
 const loadHtml2Canvas = () => new Promise((resolve, reject) => {
   if (typeof window !== 'undefined' && window.html2canvas) {
     resolve(window.html2canvas); return

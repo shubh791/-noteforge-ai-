@@ -3,7 +3,10 @@
     "allow": [
       "Bash(npm run *)",
       "PowerShell(Get-NetTCPConnection *)",
-      "PowerShell(Get-Process *)"
+      "PowerShell(Get-Process *)",
+      "Bash(git checkout *)",
+      "Bash(npm install *)",
+      "Bash(git fetch *)"
     ]
   }
 }

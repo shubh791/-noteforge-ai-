@@ -3,7 +3,6 @@
 /* ─── Custom keyframes ─── */
 @keyframes notes-spin    { to { transform: rotate(360deg); } }
 @keyframes notes-pulse   { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.35; transform:scale(.7); } }
-@keyframes notes-shimmer { 0%,100%{ opacity:.8; } 50%{ opacity:1; } }
 
 /* ─── Animated UI elements ─── */
 .btn-spinner {
@@ -35,117 +34,89 @@
 }
 
 /* ════════════════════════════════════════════════════
-   NOTES PAGE — 2-column newspaper, tight, no-scroll
+   NOTES PAGE — single-column, clean card
    ════════════════════════════════════════════════════ */
 
 .notes-page {
   background: #ffffff;
-  border-radius: 12px;
-  padding: 18px 22px;
-  max-width: 1100px;
+  border-radius: 14px;
+  padding: 32px 40px;
+  max-width: 820px;
   width: 100%;
   margin: 0 auto;
-  box-shadow: 0 4px 24px rgba(0,0,0,.09), 0 1px 4px rgba(0,0,0,.06);
-  overflow: hidden;
-
-  /* 2-column newspaper */
-  column-count: 2;
-  column-gap: 20px;
-  column-rule: 1.5px solid #e5e7eb;
-  column-fill: balance;
+  box-shadow: 0 4px 28px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.05);
 
   font-family: 'Outfit', sans-serif !important;
-  font-size: 13px;
-  line-height: 1.7;
-  color: #1a1a2e;
+  font-size: 13.5px;
+  line-height: 1.8;
+  color: #1e293b;
 }
 
-/* ── Reset so inline styles win ── */
-.notes-page *           { box-sizing: border-box; max-width: 100%; word-break: break-word; }
-.notes-page h1,.notes-page h2,.notes-page h3,
-.notes-page h4,.notes-page h5,.notes-page h6 { font-size: revert; font-weight: revert; margin: revert; }
-.notes-page p           { margin: 0 0 6px; }
-.notes-page ul,
-.notes-page ol          { margin: 0; padding: 0; list-style: none; }
-.notes-page table       { border-collapse: collapse; }
-.notes-page img         { max-width: 100%; }
+/* ── Reset so AI inline styles take full control ── */
+.notes-page *                    { box-sizing: border-box; max-width: 100%; word-break: break-word; }
+.notes-page h1, .notes-page h2,
+.notes-page h3, .notes-page h4,
+.notes-page h5, .notes-page h6  { font-size: revert; font-weight: revert; margin: revert; }
+.notes-page p                    { margin: 0 0 6px; }
+.notes-page ul, .notes-page ol  { margin: 0; padding: 0; list-style: none; }
+.notes-page table                { border-collapse: collapse; width: 100%; }
+.notes-page img                  { max-width: 100%; }
 
-/* ── Question header — full-width always ── */
+/* ── Question header always has bottom breathing room ── */
 .notes-page > :first-child {
-  column-span: all;
-  margin-bottom: 14px !important;
+  margin-bottom: 16px !important;
 }
 
-/* ── HR section dividers — full-width gradient line with diamond node ── */
+/* ── Gradient HR dividers ── */
 .notes-page > hr {
-  column-span: all !important;
   border: none !important;
   height: 22px !important;
   background:
-    radial-gradient(circle, #6366f1 4px, #e0e7ff 5px, #e0e7ff 7px, transparent 8px) center / 100% 100% no-repeat,
-    linear-gradient(90deg, transparent 0%, #c7d2fe 25%, #818cf8 50%, #c7d2fe 75%, transparent 100%) center / 100% 2px no-repeat !important;
-  margin: 18px 0 4px !important;
+    radial-gradient(circle, #6366f1 4px, #e0e7ff 5px, #e0e7ff 7px, transparent 8px)
+      center / 100% 100% no-repeat,
+    linear-gradient(90deg, transparent 0%, #c7d2fe 25%, #818cf8 50%, #c7d2fe 75%, transparent 100%)
+      center / 100% 2px no-repeat !important;
+  margin: 20px 0 6px !important;
 }
 
-/* ── Section headings — always full-width on PC so section start is clear ── */
+/* ── Section headings — stay with their content ── */
 .notes-page > h3 {
-  column-span: all !important;
   break-after: avoid;
   margin-top: 0 !important;
   margin-bottom: 10px !important;
 }
 
-/* ── Diagram outer wrappers — clear:both is the CSS hook for column-span ── */
-.notes-page > div[style*="clear:both"] {
-  column-span: all !important;
-  break-inside: avoid;
-}
+/* ── Diagrams and tables — never split mid-element ── */
+.notes-page table                                      { break-inside: avoid; }
+.notes-page div[style*="flex-direction:column"]        { break-inside: avoid; }
+.notes-page div[style*="display:grid"]                 { break-inside: avoid; }
 
-/* ── Full-width elements ── */
-.notes-page table                                        { column-span: all; break-inside: avoid; width: 100%; }
-.notes-page div[style*="repeat(4,1fr)"]                  { column-span: all; }
-.notes-page div[style*="column-span:all"],
-.notes-page div[style*="column-span: all"]               { column-span: all; }
-.notes-page div[style*="grid-template-columns:1fr 1fr"]  { column-span: all; break-inside: avoid; }
-
-/* Flowcharts and tree diagrams */
-.notes-page div[style*="flex-direction:column"][style*="align-items:center"] { column-span: all; }
-.notes-page div[style*="justify-content:center"][style*="flex-wrap:wrap"]    { column-span: all; }
-
-/* ── Cards / bordered boxes — never split ── */
+/* ── Cards — never split ── */
 .notes-page div[style*="border-radius:10px"],
-.notes-page div[style*="border-radius:9px"],
 .notes-page div[style*="border-radius:8px"],
+.notes-page div[style*="border-radius:9px"],
 .notes-page div[style*="border:2px solid"],
-.notes-page div[style*="border:1.5px solid"]             { break-inside: avoid; }
+.notes-page div[style*="border:1.5px solid"]           { break-inside: avoid; }
 
-/* ── Tighten paragraph and list spacing inside notes ── */
-.notes-page p                { margin-bottom: 5px !important; }
-.notes-page li               { margin-bottom: 1px !important; }
-.notes-page ul, .notes-page ol { margin-top: 3px !important; margin-bottom: 6px !important; }
+/* ── Tighten list and paragraph spacing ── */
+.notes-page p                      { margin-bottom: 5px !important; }
+.notes-page li                     { margin-bottom: 2px !important; }
+.notes-page ul, .notes-page ol     { margin-top: 4px !important; margin-bottom: 8px !important; }
 
-/* ── Mobile: single column ── */
+/* ── Mobile ── */
 @media (max-width: 768px) {
   .notes-page {
-    column-count: 1 !important;
-    column-rule: none !important;
-    padding: 14px 12px;
-    border-radius: 8px;
+    padding: 16px 14px;
+    border-radius: 10px;
     max-width: 100%;
-  }
-  .notes-page > hr,
-  .notes-page div[style*="grid-template-columns:1fr 1fr"],
-  .notes-page div[style*="flex-direction:column"][style*="align-items:center"],
-  .notes-page div[style*="justify-content:center"][style*="flex-wrap:wrap"] {
-    column-span: unset;
   }
 }
 
 /* ─── Scrollbars ─── */
 .scroll-thin::-webkit-scrollbar        { width: 4px; }
 .scroll-thin::-webkit-scrollbar-thumb  { background: #e2e8f0; border-radius: 2px; }
-.scroll-preview::-webkit-scrollbar       { width: 6px; }
-.scroll-preview::-webkit-scrollbar-track { background: #e2e8f0; }
+.scroll-preview::-webkit-scrollbar       { width: 5px; }
+.scroll-preview::-webkit-scrollbar-track { background: transparent; }
 .scroll-preview::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
 
 /* ─── Print ─── */
@@ -154,8 +125,6 @@
     box-shadow: none !important;
     border-radius: 0 !important;
     max-width: 100% !important;
-    column-count: 2 !important;
-    column-gap: 24px !important;
+    padding: 20px 24px !important;
   }
-  .notes-page > :first-child { column-span: all !important; }
 }
