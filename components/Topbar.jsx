@@ -33,7 +33,7 @@ export default function Topbar({ status, exporting, onClear, onGenerate, onExpor
 
         <button
           onClick={onClear}
-          className="inline-flex items-center px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-500 bg-slate-100/50 hover:bg-slate-100 hover:text-slate-700 transition-all active:scale-95 border border-transparent hover:border-slate-200"
+          className="inline-flex items-center px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-slate-500 bg-slate-100/50 hover:bg-slate-100 hover:text-slate-700 transition-all active:scale-95 border border-transparent hover:border-slate-200 cursor-pointer"
         >
           Clear
         </button>
@@ -44,7 +44,7 @@ export default function Topbar({ status, exporting, onClear, onGenerate, onExpor
           className={`relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 rounded-xl text-xs font-extrabold tracking-wide transition-all active:scale-95 shadow-md
             ${isWorking
               ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
-              : 'bg-slate-900 text-white hover:bg-slate-800 hover:shadow-indigo-200'
+              : 'bg-slate-900 text-white hover:bg-slate-800 hover:shadow-indigo-200 cursor-pointer'
             }`}
         >
           {isWorking ? (
@@ -69,7 +69,7 @@ export default function Topbar({ status, exporting, onClear, onGenerate, onExpor
             <button
               onClick={() => onExportImage(false)}
               disabled={exporting}
-              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-all active:scale-95 disabled:opacity-50"
+              className="inline-flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs font-bold text-blue-600 bg-blue-50 border border-blue-100 hover:bg-blue-100 transition-all active:scale-95 disabled:opacity-50 cursor-pointer disabled:cursor-default"
             >
               <span>{exporting ? '...' : '↓'}</span>
               <span className="hidden sm:inline">Export</span>
@@ -78,7 +78,7 @@ export default function Topbar({ status, exporting, onClear, onGenerate, onExpor
             <button
               onClick={() => onExportImage(true)}
               disabled={exporting}
-              className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 hover:bg-emerald-100 transition-all active:scale-95 disabled:opacity-50"
+              className="hidden md:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 hover:bg-emerald-100 transition-all active:scale-95 disabled:opacity-50 cursor-pointer disabled:cursor-default"
             >
               {exporting ? '...' : '↓ High-Res'}
             </button>

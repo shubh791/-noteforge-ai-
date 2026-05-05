@@ -3,7 +3,7 @@ export default function InputPanel({ inputText, apiKey, status, onTextChange, on
   const charCount = inputText.length
 
   return (
-    <div className={`flex flex-col gap-4 p-4 flex-1 md:flex-none md:w-80 md:flex-shrink-0 bg-white/50 backdrop-blur-md border-r border-slate-200 ${className || ''}`}>
+    <div className={`flex flex-col gap-4 p-4 flex-1 md:flex-none md:w-80 md:flex-shrink-0 bg-white/50 backdrop-blur-md border-r border-slate-200 overflow-hidden ${className || ''}`}>
       
       {/* Section Header */}
       <div className="flex items-center justify-between shrink-0">
@@ -33,22 +33,30 @@ export default function InputPanel({ inputText, apiKey, status, onTextChange, on
         </div>
         <input
           className="w-full px-3 py-1.5 text-xs bg-slate-50 border border-slate-100 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-400 transition-all"
+          style={{ fontSize: '16px' }}
           type="password"
           value={apiKey}
           onChange={(e) => onKeyChange(e.target.value)}
           placeholder="nvapi-..."
           spellCheck={false}
+          autoComplete="off"
+          autoCorrect="off"
+          autoCapitalize="off"
         />
       </div>
 
-      {/* Text input area - This now takes up the remaining space properly */}
+      {/* Text input area */}
       <div className="relative flex-1 min-h-0">
         <textarea
-          className="w-full h-full p-4 text-sm leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all"
+          className="w-full h-full min-h-[160px] p-4 leading-relaxed text-slate-700 bg-white border border-slate-200 rounded-2xl resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500/10 focus:border-indigo-400 transition-all"
+          style={{ fontSize: '16px' }}
           value={inputText}
           onChange={(e) => onTextChange(e.target.value)}
           disabled={isWorking}
           placeholder="Paste raw text here..."
+          spellCheck={false}
+          autoCorrect="off"
+          autoCapitalize="off"
         />
       </div>
 
@@ -65,9 +73,9 @@ export default function InputPanel({ inputText, apiKey, status, onTextChange, on
 
         <button
           className={`w-full py-3.5 rounded-xl font-bold text-white transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-md
-            ${isWorking 
-              ? 'bg-slate-400 cursor-not-allowed' 
-              : 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:shadow-indigo-200 hover:brightness-105'
+            ${isWorking
+              ? 'bg-slate-400 cursor-not-allowed'
+              : 'bg-gradient-to-r from-indigo-600 to-violet-600 hover:shadow-indigo-200 hover:brightness-105 cursor-pointer'
             }`}
           onClick={onGenerate}
           disabled={isWorking}

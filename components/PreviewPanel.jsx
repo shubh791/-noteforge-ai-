@@ -44,7 +44,7 @@ export default function PreviewPanel({ status, outputHtml, errorMsg, notesRef, o
       )}
 
       {/* ── Scrollable content area ── */}
-      <div className="flex-1 overflow-y-auto scroll-preview px-4 py-6 md:px-10 md:py-8">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden scroll-preview px-4 py-6 md:px-10 md:py-8">
 
         {/* ── Idle ── */}
         {status === 'idle' && (

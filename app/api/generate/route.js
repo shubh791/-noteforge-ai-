@@ -18,11 +18,6 @@ export async function POST(req) {
   const { text } = body
   const apiKey = (body.apiKey || process.env.NVIDIA_API_KEY || '').trim()
 
-  // Debug: log whether env key was found (visible in terminal, not browser)
-  if (!body.apiKey && process.env.NVIDIA_API_KEY) {
-    console.log('[generate] Using NVIDIA_API_KEY from .env.local')
-  }
-
   if (!text || text.trim().length < 10) {
     return NextResponse.json({ error: 'Text is too short — paste more content.' }, { status: 400 })
   }
