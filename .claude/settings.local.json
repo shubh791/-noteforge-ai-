@@ -6,7 +6,16 @@
       "PowerShell(Get-Process *)",
       "Bash(git checkout *)",
       "Bash(npm install *)",
-      "Bash(git fetch *)"
+      "Bash(git fetch *)",
+      "Bash(Get-ChildItem -Path \"D:\\\\downloads\\\\Downloads\\\\rl-notes-nim\\\\rl-notes-nim\" -Recurse -Name)",
+      "PowerShell(Get-ChildItem -Path \"D:\\\\downloads\\\\Downloads\\\\rl-notes-nim\\\\rl-notes-nim\" -Recurse -ErrorAction SilentlyContinue | ForEach-Object { $_.FullName } | Sort-Object)",
+      "Bash(dir \"D:\\\\downloads\\\\Downloads\\\\rl-notes-nim\\\\rl-notes-nim\\\\lib\")",
+      "Bash(dir \"D:\\\\downloads\\\\Downloads\\\\rl-notes-nim\\\\rl-notes-nim\\\\components\\\\notes\")",
+      "Bash(dir \"D:\\\\downloads\\\\Downloads\\\\rl-notes-nim\\\\rl-notes-nim\\\\styles\")",
+      "Bash(git restore *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
